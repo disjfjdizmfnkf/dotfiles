@@ -1,0 +1,218 @@
+// 将键绑定放在此文件中以覆盖默认值
+[
+  // Navigation
+  {
+    "key": "alt-h",
+    "command": "workbench.action.navigateLeft"
+  },
+  {
+    "key": "alt-l",
+    "command": "workbench.action.navigateRight"
+  },
+  {
+    "key": "alt-k",
+    "command": "workbench.action.navigateUp"
+  },
+  {
+    "key": "alt-j",
+    "command": "workbench.action.navigateDown"
+  },
+  {
+    "key": "alt+1",
+    "command": "workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "alt+oem_7",
+    "command": "workbench.action.togglePanel",
+    "when": "config.workbench.layoutControl.type == 'both' || config.workbench.layoutControl.type == 'toggles'"
+  },
+  {
+    "key": "alt+oem_1",
+    "command": "workbench.panel.chat",
+    "when": "workbench.panel.chat.view.copilot.active"
+  },
+  // 快速打开
+  {
+    "key": "shift shift",
+    "command": "workbench.action.quickOpen"
+  },
+  // 在快速打开中切换候选项
+  {
+    "key": "ctrl+n",
+    "command": "workbench.action.quickOpenSelectNext",
+    "when": "inQuickOpen"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "workbench.action.quickOpenSelectPrevious",
+    "when": "inQuickOpen"
+  },
+  // 搜索标签页
+  {
+    "key": "ctrl+shift+o",
+    "command": "workbench.action.showAllEditors"
+  },
+  // 在快速打开中打开文件到侧边栏
+  {
+    "key": "ctrl+enter",
+    "command": "workbench.action.quickOpenSelectNext",
+    "when": "inQuickOpen && filesToOpen.length === 1"
+  },
+  // 标签页buffer
+  // 在上一行/下一行插入
+  {
+    "key": "ctrl+enter",
+    "command": "editor.action.insertLineBefore",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+enter",
+    "command": "editor.action.insertLineAfter",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  // 块注释
+  {
+    "key": "ctrl+shift+/",
+    "command": "editor.action.blockComment",
+    "when": "editorTextFocus"
+  },
+  // 新建文件和文件夹
+  {
+    "key": "alt+n",
+    "command": "explorer.newFile"
+  },
+  {
+    "key": "shift+alt+n",
+    "command": "explorer.newFolder"
+  },
+  // 模仿vim
+  {
+    "key": "ctrl+u",
+    "command": "cursorMove",
+    "args": {
+      "to": "up",
+      "by": "line",
+      "value": 10
+    }
+  },
+  {
+    "key": "ctrl+d",
+    "command": "cursorMove",
+    "args": {
+      "to": "down",
+      "by": "line",
+      "value": 10
+    }
+  },
+  {
+    "key": "ctrl+j",
+    "command": "cursorMove",
+    "args": {
+      "to": "down",
+      "by": "line",
+      "value": 1
+    }
+  },
+  {
+    "key": "ctrl+k",
+    "command": "cursorMove",
+    "args": {
+      "to": "up",
+      "by": "line",
+      "value": 1
+    }
+  },
+  {
+    "key": "ctrl+h",
+    "command": "cursorMove",
+    "args": {
+      "to": "left",
+      "by": "character",
+      "value": 1
+    }
+  },
+  {
+    "key": "ctrl+l",
+    "command": "cursorMove",
+    "args": {
+      "to": "right",
+      "by": "character",
+      "value": 1
+    }
+  },
+  // plugin keybinding
+  {
+    "key": "ctrl+=",
+    "command": "expand_region",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+-",
+    "command": "undo_expand_region",
+    "when": "editorTextFocus && editorHasSelection"
+  },
+  // 切换候选项
+  {
+    "key": "ctrl+n",
+    "command": "selectNextSuggestion",
+    "when": "suggestWidgetVisible"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "selectPrevSuggestion",
+    "when": "suggestWidgetVisible"
+  },
+  // 关闭当前标签页
+  {
+    "key": "ctrl+w",
+    "command": "workbench.action.closeActiveEditor"
+  },
+  // 打开文件夹
+  {
+    "key": "ctrl+o",
+    "command": "workbench.action.files.openFolder"
+  },
+  // 打开文件
+  {
+    "key": "alt+o",
+    "command": "workbench.action.files.openFile"
+  },
+  {
+    "key": "alt+oem_1",
+    "command": "workbench.panel.chat",
+    "when": "workbench.panel.chat.view.copilot.active"
+  },
+  {
+    "key": "ctrl+alt+i",
+    "command": "-workbench.panel.chat",
+    "when": "workbench.panel.chat.view.copilot.active"
+  },
+  {
+    "key": "unknown",
+    "command": "abracadabra.inline",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+alt+n",
+    "command": "-abracadabra.inline",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+oem_3",
+    "command": "leetcode.testSolution"
+  },
+  {
+    "key": "ctrl+alt+oem_3",
+    "command": "leetcode.submitSolution"
+  },
+  {
+    "key": "ctrl+alt+oem_1",
+    "command": "workbench.action.quickchat.toggle",
+    "when": "chatIsEnabled"
+  },
+  {
+    "key": "ctrl+shift+alt+l",
+    "command": "-workbench.action.quickchat.toggle",
+    "when": "chatIsEnabled"
+  }
+]

@@ -1,0 +1,124 @@
+#!/usr/bin/sh
+# @author nate zhou
+# @since 2025
+# river/bindings
+
+mod=Mod4    # Mod1=Alt, Mod4=Super
+wobfifo="/tmp/wob.fifo"
+term="footclient"
+
+# basic
+#riverctl map normal ${mod}+Shift e exit
+riverctl map normal ${mod}+Shift r spawn "$HOME/.config/river/init"
+
+riverctl map normal $mod Return spawn "footclient"
+riverctl map normal Mod1 Return spawn "foot"
+
+riverctl map normal Control+Shift Return spawn "footclient -T Scratchpad_Tmux $HOME/.local/bin/tmuxd"
+
+riverctl map normal $mod r spawn "$term lf"
+
+riverctl map normal $mod d spawn "wmenu-run -f \"SourceCodePro Medium 13\" -i -N \"$background\" -S \"$color9\" -s \"$background\""
+
+riverctl map -release normal ${mod}+Shift+Control l spawn "swaylock"
+
+riverctl map normal ${mod}+Shift+Control h spawn "$HOME/.local/bin/swayhibe"
+
+riverctl map normal ${mod}+Shift e spawn "$HOME/.local/bin/riverexit"
+
+riverctl map normal None Caps_Lock spawn "$HOME/.local/bin/capslock"
+riverctl map normal $mod space spawn "fcitx5-remote -t && notify-send -u normal -r 3289 -t 1100 $(fcitx5-remote -n)"
+
+riverctl map normal $mod b spawn "$HOME/.local/bin/wbookmark"
+riverctl map normal ${mod}+Shift b spawn "$HOME/.local/bin/wbookmark-record"
+
+riverctl map normal $mod c spawn "$HOME/.local/bin/wclip"
+
+riverctl map normal $mod g spawn "$HOME/.local/bin/wshot"
+riverctl map normal ${mod}+Shift g spawn "$HOME/.local/bin/wshot-geo"
+riverctl map normal ${mod}+Control g spawn "grim && notify-send -u low -r 88 \"Screenshot taken on all outputs\""
+
+riverctl map normal $mod n spawn "dunstctl close"
+riverctl map normal ${mod}+Shift n spawn "dunstctl history-pop"
+
+riverctl map normal $mod p spawn "mpc toggle"
+
+riverctl map -repeat normal $mod bracketleft spawn "$HOME/.local/bin/bright --minus"
+riverctl map -repeat normal $mod bracketright spawn "$HOME/.local/bin/bright --plus"
+
+riverctl map -repeat normal $mod minus spawn "$HOME/.local/bin/audio sink --minus"
+riverctl map -repeat normal $mod equal spawn "$HOME/.local/bin/audio sink --plus"
+riverctl map normal $mod m spawn "$HOME/.local/bin/audio sink --mute"
+
+riverctl map -repeat normal ${mod}+Shift minus spawn "$HOME/.local/bin/audio source --minus"
+riverctl map -repeat normal ${mod}+Shift equal spawn "$HOME/.local/bin/audio source --plus"
+riverctl map normal ${mod}+Shift m spawn "$HOME/.local/bin/audio source --mute"
+
+# windows management
+riverctl map  normal $mod q "" # don't send 'q'
+riverctl map -release normal $mod q close
+
+riverctl map normal $mod f toggle-fullscreen
+riverctl map normal ${mod}+Shift f toggle-float
+
+# window navigation
+riverctl map normal $mod j focus-view next
+riverctl map normal $mod k focus-view previous
+
+# window movement
+riverctl map normal ${mod}+Shift j swap next
+riverctl map normal ${mod}+Shift k swap previous
+
+# shift tags
+riverctl map normal $mod Period spawn "river-shifttags --occupied"
+riverctl map normal $mod Comma spawn "river-shifttags --shift -1 --occupied"
+
+# workspace navigation
+riverctl map normal ${mod}+Control Period focus-output next
+riverctl map normal ${mod}+Control Comma focus-output previous
+
+# workspace movement
+riverctl map normal ${mod}+Shift Period spawn "riverctl send-to-output -current-tags next && riverctl focus-output next"
+riverctl map normal ${mod}+Shift Comma spawn "riverctl send-to-output -current-tags previous && riverctl focus-output previous"
+
+# bring focus to the top of the layout stack
+riverctl map normal $mod z zoom
+
+# adjust ratio
+riverctl map -repeat normal $mod h send-layout-cmd rivertile "main-ratio -0.05"
+riverctl map -repeat normal $mod l send-layout-cmd rivertile "main-ratio +0.05"
+
+# adjust main count
+riverctl map normal ${mod}+Shift h send-layout-cmd rivertile "main-count +1"
+riverctl map normal ${mod}+Shift l send-layout-cmd rivertile "main-count -1"
+
+# move floating window
+riverctl map normal $mod y move left 100
+riverctl map normal $mod u move down 100
+riverctl map normal $mod i move up 100
+riverctl map normal $mod o move right 100
+
+# resize views
+riverctl map normal ${mod}+Shift y resize horizontal -100
+riverctl map normal ${mod}+Shift u resize vertical 100
+riverctl map normal ${mod}+Shift i resize vertical -100
+riverctl map normal ${mod}+Shift o resize horizontal 100
+
+# mouse
+riverctl map-pointer normal $mod BTN_LEFT move-view
+riverctl map-pointer normal $mod BTN_RIGHT resize-view
+riverctl map-pointer normal $mod BTN_MIDDLE toggle-float
+
+# tags
+# Super+0 to focus all tags
+# Super+Shift+0 to tag focused view with all tags
+all_tags=$(((1 << 32) - 1))
+riverctl map normal $mod 0 set-focused-tags $all_tags
+riverctl map normal ${mod}+Shift 0 set-view-tags $all_tags
+
+riverctl map normal $mod tab focus-previous-tags
+
+riverctl map normal ${mod}+Control h  send-layout-cmd rivertile "main-location left"
+riverctl map normal ${mod}+Control j  send-layout-cmd rivertile "main-location bottom"
+riverctl map normal ${mod}+Control k    send-layout-cmd rivertile "main-location top"
+riverctl map normal ${mod}+Control l send-layout-cmd rivertile "main-location right"

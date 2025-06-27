@@ -1,0 +1,27 @@
+# vim:ft=swayconfig
+# @author nate zhou
+# @since 2023,2024,2025
+# sway/autostart
+
+output 'eDP-1' mode --custom 1920x1080@60.000Hz pos 0 0
+output  'DP-1' mode --custom 1920x1080@60.000Hz pos -1920 0
+
+seat seat0 hide_cursor 3000
+seat seat0 hide_cursor when-typing enable
+
+exec_always "swaybg -i ${HOME}/.local/share/wallpaper -m fill"
+
+exec_always "${HOME}/.local/bin/foots"
+
+exec_always "${HOME}/.local/bin/wobd"
+
+exec "swayidle"
+
+exec "$HOME/.local/sbin/clsd"
+
+exec "gammastep -O 5000"
+
+exec "fcitx5 -d"
+
+exec "wl-paste --watch cliphist store"
+

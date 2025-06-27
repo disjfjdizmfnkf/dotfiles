@@ -1,0 +1,12 @@
+# taskrc
+# @author nate zhou
+# @since 2023,2024,2025
+
+weekstart=monday
+
+#data.location=~/.local/share/task
+data.location=~/.config/task/task
+hooks.location=~/.config/task/hooks
+
+# Color theme (uncomment one to use)
+include dark-256.theme

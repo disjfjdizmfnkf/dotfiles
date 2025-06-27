@@ -1,0 +1,96 @@
+# i3blocks/config
+# @author nate zhou
+# @since 2025
+
+# Global properties
+separator=true
+separator_block_width=0
+
+# modules
+#[mpd]
+#command= i3blocks-mpd
+#interval=5
+#signal=8
+
+#[wttr]
+#command= i3blocks-wttr
+#interval=once
+#signal=7
+
+#[calcurse]
+#command= i3blocks-calcurse
+#interval=once
+#signal=6
+
+#[newsboat]
+#command= i3blocks-newsboat
+#interval=once
+#signal=5
+
+#[pacman]
+#command= i3blocks-pacman
+#interval=once
+#signal=4
+
+#[uptime]
+#command= i3blocks-uptime
+#interval=900
+
+#[login]
+#command= i3blocks-login
+#interval=60
+
+#[home]
+#command= i3blocks-home
+#interval=60
+
+#[root]
+#command= i3blocks-root
+#interval=60
+
+#[memory]
+#command= i3blocks-memory
+#interval=5
+
+#[cpu]
+#command= i3blocks-cpu
+#interval=5
+
+#[temperature]
+#command= i3blocks-temperature
+#interval=5
+
+#[brightness]
+#command= i3blocks-brightness
+#interval=once
+#signal=3
+
+#[microphone]
+#command= i3blocks-microphone
+#interval=once
+#signal=2
+
+#[volume]
+#command= i3blocks-volume
+#interval=once
+#signal=1
+
+#[bluetooth]
+#command= i3blocks-bluetooth
+#interval=10
+
+#[wifi]
+#command= i3blocks-wifi
+#interval=10
+
+#[ethernet]
+#command= i3blocks-ethernet
+#interval=10
+
+#[battery]
+#command= i3blocks-battery
+#interval=5
+
+[time]
+command= echo $(date '+%b-%d %a %H:%M')
+interval=5

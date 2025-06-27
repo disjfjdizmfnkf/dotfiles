@@ -1,0 +1,100 @@
+/* wallust-wlogout */
+
+/* Importing wallust colors */
+
+@import '../../.config/waybar/wallust/colors-waybar.css';
+
+window {
+    font-family: Fira Code Medium;
+    font-size: 16pt;
+    color: #cdd6f4; /* text */
+    background-color: rgba(30, 30, 46, 0.6);
+}
+
+button {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20%;
+    background-color: rgba(200, 220, 255, 0);
+    border-radius: 80px; /* Increased border radius for a more rounded look */
+    transition: background-color 0.3s ease-in, color 0.3s ease-in, box-shadow 0.3s ease-in;
+}
+
+button:focus {
+    background-size: 30%;
+    outline: none;
+    border: 1px solid #afb0b2;
+}
+
+button:hover {
+    color: #1e1e2e;
+    background-color: #e0e7ff;
+    background-size: 30%;
+    /* animation: 1ms ease-in; */
+    border-radius: 80px; 
+    border: 2px solid #315584;
+    /* box-shadow: 0 0 50px #1e1e2e;  */
+    animation: gradient_f 1s ease;
+    /* animation: 1ms ease-in; */
+}
+
+/* Define the keyframes for the gradient animation */
+@keyframes gradient_f {
+    0% {
+        background-color: rgba(200, 220, 255, 0);
+    }
+    25% {
+        background-color: #b0c4de;
+    }
+    50% {
+        background-color: #cdd6f4;
+    }
+    75% {
+        background-color: #d8e2f8;
+    }
+    100% {
+        background-color: #e0e7ff;
+    }
+}
+
+
+/* Adjust the size of the icon or content inside the button */
+button span {
+    font-size: 1.2em; /* Increase the font size */
+}
+#lock {
+    background-image: url("./icons/lock.png");
+}
+#lock:hover {
+    background-image: url("./icons/lock-hover.png");
+}
+#logout {
+    background-image: url("./icons/logout.png");
+}
+#logout:hover {
+    background-image: url("./icons/logout-hover.png");
+}
+#suspend {
+    background-image: url("./icons/sleep.png");
+}
+#suspend:hover {
+    background-image: url("./icons/sleep-hover.png");
+}
+#shutdown {
+    background-image: url("./icons/power.png");
+}
+#shutdown:hover {
+    background-image: url("./icons/power-hover.png");
+}
+#reboot {
+    background-image: url("./icons/restart.png");
+}
+#reboot:hover {
+    background-image: url("./icons/restart-hover.png");
+}
+#hibernate {
+    background-image: url("./icons/hibernate.png");
+}
+#hibernate:hover {
+    background-image: url("./icons/hibernate-hover.png");
+}

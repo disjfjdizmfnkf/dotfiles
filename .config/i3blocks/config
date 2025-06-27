@@ -1,0 +1,151 @@
+# i3blocks/config
+# @author nate zhou
+# @since 2025
+
+# Global properties
+separator_block_width=0
+markup=pango
+color=#ffffff
+background=#000000
+
+# use i3blocks to do cronjob
+[swaymaxd]
+command= swaymaxd>/dev/null
+interval=60
+
+# a workaround for gpg-agent ENV issue in cronie
+[mbs]
+command= mbs
+interval=1800
+
+[mpdd]
+command= i3blocks-mpdd
+# -2 will respawn the command as soon as it terminates
+interval=-2
+
+# modules
+########
+[mpd]
+command= i3blocks-mpd
+interval=once
+signal=8
+
+########
+[wttr]
+command= i3blocks-wttr
+interval=once
+signal=7
+
+########
+[mutt]
+command= i3blocks-mutt
+interval=60
+signal=18
+
+[newsboat]
+command= i3blocks-newsboat
+interval=60
+signal=5
+
+[task]
+command= i3blocks-task
+interval=60
+signal=15
+
+[calcurse]
+command= i3blocks-calcurse
+interval=once
+signal=6
+
+########
+[pacman]
+command= i3blocks-pacman
+interval=once
+signal=4
+
+[login]
+command= i3blocks-login
+interval=60
+signal=14
+
+[uptime]
+command= i3blocks-uptime
+interval=900
+signal=9
+
+########
+[usb]
+command= i3blocks-usb
+# use udev rules to refresh this i3blocks module
+# `dotfiles/etc/udev/rules.d/99-i3blocks-usb.`
+interval=once
+signal=16
+
+[root]
+command= i3blocks-root
+interval=60
+signal=13
+
+[home]
+command= i3blocks-home
+interval=60
+signal=13
+
+########
+[memory]
+command= i3blocks-memory
+interval=5
+
+[cpu]
+command= i3blocks-cpu
+interval=5
+
+[temperature]
+command= i3blocks-temperature
+interval=5
+
+########
+[wifi]
+command= i3blocks-wifi
+interval=10
+signal=11
+
+[ethernet]
+command= i3blocks-ethernet
+interval=10
+signal=11
+
+########
+[brightness]
+command= i3blocks-brightness
+interval=once
+signal=3
+
+[microphone]
+command= i3blocks-microphone
+interval=60
+signal=2
+
+[volume]
+command= i3blocks-volume
+interval=60
+signal=1
+
+########
+[bluetooth]
+command= i3blocks-bluetooth
+# use udev rules to refresh this i3blocks module
+# `dotfiles/etc/udev/rules.d/99-i3blocks-bluetooth.`
+interval=60
+signal=10
+
+[battery]
+command= i3blocks-battery
+interval=5
+signal=12
+
+########
+[time]
+command= i3blocks-time
+interval=5
+signal=17

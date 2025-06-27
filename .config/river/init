@@ -1,0 +1,71 @@
+#!/usr/bin/sh
+# @author nate zhou
+# @since 2025
+# river/init
+
+. $HOME/.local/bin/colors.sh    # source colorscheme
+. $HOME/.config/river/bindings
+. $HOME/.config/river/autostart
+. $HOME/.config/river/modes
+
+# window manager
+riverctl default-layout rivertile
+rivertile -view-padding 6 -outer-padding 6 -main-ratio 0.50 &
+
+# remap key
+riverctl keyboard-layout-file "$HOME/.config/layout.xkb"
+
+# output
+riverctl spawn "$HOME/.local/bin/wlr-output"
+
+riverctl focus-output left
+riverctl send-layout-cmd rivertile "main-location left"
+
+riverctl focus-output right
+riverctl send-layout-cmd rivertile "main-location left"
+
+# input
+riverctl set-repeat 30 200
+
+riverctl hide-cursor timeout 3000
+riverctl hide-cursor when-typing enabled
+
+for i in $(riverctl list-inputs | grep -i touchpad); do
+    riverctl input "$i" tap enabled
+done
+
+# border
+riverctl border-color-focused 0xb16286
+riverctl border-color-unfocused 0x586e75
+riverctl border-width 3
+
+# window rules
+riverctl rule-add -app-id "*" ssd   # fix border for every window
+riverctl rule-add -app-id "file-*" -title "Export Image as *" float # GIMP
+riverctl rule-add -app-id "script-fu" float # GIMP gegl operations
+
+# tags
+for i in $(seq 1 9)
+do
+    tags=$((1 << ($i - 1)))
+    riverctl map normal $mod $i set-focused-tags $tags
+    riverctl map normal ${mod}+Shift $i set-view-tags $tags
+    riverctl map normal Control $i toggle-focused-tags $tags
+    riverctl map normal ${mod}+Control $i toggle-view-tags $tags
+done
+
+# sticky
+all_tags=$(((1 << 32) - 1))
+sticky_tag=$((1 << 31))
+all_but_sticky_tag=$(( $all_tags ^ $sticky_tag ))
+
+riverctl map normal $mod S toggle-view-tags $sticky_tag
+riverctl spawn-tagmask ${all_but_sticky_tag}
+
+# modify the normal keybind to always select the sticky tag
+for i in $(seq 1 9)
+do
+    tags=$((1 << ($i - 1)))
+    # $mod+[1-9] to focus tag [0-8]
+    riverctl map normal $mod $i set-focused-tags $(($sticky_tag + $tags))
+done

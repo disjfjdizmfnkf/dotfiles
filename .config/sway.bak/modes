@@ -1,0 +1,117 @@
+# vim:ft=swayconfig
+# @author nate zhou
+# @since 2023,2024,2025
+# sway/modes
+
+set $mod Mod4
+
+set $mode_cursor "[;] num:F[n] | [d]Del | [HJKL]:Slow | Mod[hjkl]:Arrow | [n]PageUp | [p]PageDn"
+set $mode_wmenu "[w] w[w]iki w[h]eart w[b]ook [a]mount [f]locks [p]off w[s]hot w[c]ast w[m]ulti wsin[k] w[v]oice w[j]doc"
+set $mode_apostrophe "[:] enable[t]ap disable[T]ap enable[p]ad disable[P]ad clip[h]ist-wipe [l]supdates d[w] w[c]al"
+set $mode_space "[p]inyin keyboard-[u]s [a]nthy"
+
+
+# fcitx5 input method
+bindsym CONTROL+grave mode $mode_space
+mode $mode_space {
+    bindsym Escape mode "default"
+    bindsym Space mode "default"
+    bindsym $mod+Shift+space mode "default"
+
+    bindsym p exec swaymsg mode "default" && fcitx5-remote -s pinyin && notify-send -u normal -r 3289 -t 1100 "$(fcitx5-remote -n)"
+    bindsym u exec swaymsg mode "default" && fcitx5-remote -s keyboard-us && notify-send -u normal -r 3289 -t 1100 "$(fcitx5-remote -n)"
+    bindsym a exec swaymsg mode "default" && fcitx5-remote -s anthy && notify-send -u normal -r 3289 -t 1100 "$(fcitx5-remote -n)"
+    bindsym h exec swaymsg mode "default" && fcitx5-remote -s hangul && notify-send -u normal -r 3289 -t 1100 "$(fcitx5-remote -n)"
+}
+
+
+
+# wmenu scripts
+bindsym $mod+w mode $mode_wmenu
+mode $mode_wmenu {
+    bindsym Escape mode "default"
+    bindsym Space mode "default"
+    bindsym $mod+w mode "default"
+    bindsym $mod+semicolon mode $mode_cursor ; seat seat0 hide_cursor when-typing disable
+    bindsym $mod+apostrophe mode $mode_apostrophe
+
+    bindsym w exec ~/.local/bin/wwiki ; mode "default"
+    bindsym h exec ~/.local/bin/wheart ; mode "default"
+    bindsym b exec ~/.local/bin/wbook ; mode "default"
+    bindsym a exec ~/.local/bin/amount ; mode "default"
+    bindsym f exec ~/.local/bin/flocks ; mode "default"
+    bindsym p exec ~/.local/bin/poff ; mode "default"
+    bindsym s exec ~/.local/bin/wshot ; mode "default"
+    bindsym c exec $term ~/.local/bin/wcast ; mode "default"
+    bindsym m exec ~/.local/bin/wmulti ; mode "default"
+    bindsym k exec ~/.local/bin/wsink ; mode "default"
+    bindsym v exec ~/.local/bin/wvoice ; mode "default"
+    bindsym j exec ~/.local/bin/wjdoc ; mode "default"
+}
+
+# misc laucher
+bindsym $mod+apostrophe mode $mode_apostrophe
+mode $mode_apostrophe {
+    bindsym Escape mode "default"
+    bindsym Space mode "default"
+    bindsym $mod+semicolon mode $mode_cursor ; seat seat0 hide_cursor when-typing disable
+    bindsym $mod+apostrophe mode $mode_apostrophe
+    bindsym $mod+w mode $mode_wmenu
+
+    bindsym t input type:touchpad tap enabled, exec notify-send "tap enabled" ; mode "default"
+    bindsym Shift+t input type:touchpad tap disabled, exec notify-send "tap disabled" ; mode "default"
+    bindsym p input type:touchpad events toggle enabled, exec notify-send "touchpad enabled" ; mode "default"
+    bindsym Shift+p input type:touchpad events toggle disabled, exec notify-send "touchpad disabled" ; mode "default"
+    bindsym h exec cliphist wipe; mode "default"; exec notify-send -u normal -r 196 "cliphist wiped"
+    bindsym w exec ~/.local/bin/dw ; mode "default"
+    bindsym l exec ~/.local/bin/lsupdates ; mode "default"
+    bindsym c exec ~/.local/bin/wcal ; mode "default"
+}
+
+# keyboard as mouse
+bindsym $mod+semicolon mode $mode_cursor; seat seat0 hide_cursor when-typing disable
+mode $mode_cursor {
+    bindsym Escape mode "default" ; seat seat0 hide_cursor when-typing enable
+    bindsym Space mode "default" ; seat seat0 hide_cursor when-typing enable
+    bindsym $mod+semicolon mode "default"; seat seat0 hide_cursor when-typing enable
+    bindsym $mod+apostrophe mode $mode_apostrophe; seat seat0 hide_cursor when-typing enable
+    bindsym $mod+w mode $mode_wmenu; seat seat0 hide_cursor when-typing enable
+
+    bindsym 1 exec wtype -k "F1" ; mode "default"; seat seat0 hide_cursor when-typing enable
+    bindsym 2 exec wtype -k "F2" ; mode "default"; seat seat0 hide_cursor when-typing enable
+    bindsym 3 exec wtype -k "F3" ; mode "default"; seat seat0 hide_cursor when-typing enable
+    bindsym 4 exec wtype -k "F4" ; mode "default"; seat seat0 hide_cursor when-typing enable
+    bindsym 5 exec wtype -k "F5" ; mode "default"; seat seat0 hide_cursor when-typing enable
+    bindsym 6 exec wtype -k "F6" ; mode "default"; seat seat0 hide_cursor when-typing enable
+    bindsym 7 exec wtype -k "F7" ; mode "default"; seat seat0 hide_cursor when-typing enable
+    bindsym 8 exec wtype -k "F8" ; mode "default"; seat seat0 hide_cursor when-typing enable
+    bindsym 9 exec wtype -k "F9" ; mode "default"; seat seat0 hide_cursor when-typing enable
+    bindsym 0 exec wtype -k "F10" ; mode "default"; seat seat0 hide_cursor when-typing enable
+    bindsym minus exec wtype -k "F11" ; mode "default"; seat seat0 hide_cursor when-typing enable
+    bindsym equal exec wtype -k "F12" ; mode "default"; seat seat0 hide_cursor when-typing enable
+    bindsym d wtype -k "Delete"
+    # mouse cursor
+    bindsym h seat - cursor move -50 0
+    bindsym j seat - cursor move 0 +50
+    bindsym k seat - cursor move 0 -50
+    bindsym l seat - cursor move +50 0
+    bindsym Shift+h seat - cursor move -10 0
+    bindsym Shift+j seat - cursor move 0 +10
+    bindsym Shift+k seat - cursor move 0 -10
+    bindsym Shift+l seat - cursor move +10 0
+    bindsym slash seat - cursor set 9999 9999
+    # arrow keys
+    bindsym $mod+h exec wtype -k "Left"
+    bindsym $mod+j exec wtype -k "Down"
+    bindsym $mod+k exec wtype -k "Up"
+    bindsym $mod+l exec wtype -k "Right"
+    # Left click (click won't work as a keybindings if with $mod key)
+    bindsym $mod+comma seat - cursor press button1, seat - cursor release button1
+    bindsym comma seat - cursor press button1, seat - cursor release button1
+    # Right click
+    bindsym $mod+period seat - cursor press button3, seat - cursor release button3
+    bindsym period seat - cursor press button3, seat - cursor release button3
+    # page keys
+    bindsym p exec wtype -k "Page_up"
+    bindsym n exec wtype -k "Page_down"
+    }

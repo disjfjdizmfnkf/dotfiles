@@ -1,0 +1,71 @@
+#!/usr/bin/sh
+# river/modes
+# @author nate zhou
+# @since 2025
+
+mod=Mod4
+mode_fcitx="[p]inyin [a]nthy"
+mode_wmenu="[w[w]iki w[h]eart w[b]ook [a]mount [f]locks [p]off w[m]ulti w[s]ink w[j]doc w[e]moji"
+mode_apostrophe="enable[t]ap disable[T]ap clip[h]ist-wipe [l]supdates d[w] w[c]al"
+mode_wtype="[hjkl]arrorws"
+
+riverctl declare-mode "$mode_fcitx"
+riverctl map normal ${mod}+Shift space enter-mode "$mode_fcitx"
+riverctl map "$mode_fcitx" ${mod}+Shift space enter-mode normal
+riverctl map "$mode_fcitx" None Escape enter-mode normal
+riverctl map "$mode_fcitx" None space enter-mode normal
+riverctl map "$mode_fcitx" None p spawn "fcitx5-remote -s pinyin && riverctl enter-mode normal"
+riverctl map "$mode_fcitx" None a spawn "fcitx5-remote -s anthy && riverctl enter-mode normal"
+
+
+riverctl declare-mode "$mode_wmenu"
+riverctl map normal $mod w enter-mode "$mode_wmenu"
+riverctl map "$mode_wmenu" $mod w enter-mode normal
+riverctl map "$mode_wmenu" None space enter-mode normal
+riverctl map "$mode_wmenu" None Escape enter-mode normal
+riverctl map "$mode_wmenu" None w spawn "riverctl enter-mode normal && $HOME/.local/bin/wwiki"
+riverctl map "$mode_wmenu" None h spawn "riverctl enter-mode normal && $HOME/.local/bin/wheart"
+riverctl map "$mode_wmenu" None b spawn "riverctl enter-mode normal && $HOME/.local/bin/wbook"
+riverctl map "$mode_wmenu" None a spawn "riverctl enter-mode normal && $HOME/.local/bin/amount"
+riverctl map "$mode_wmenu" None f spawn "riverctl enter-mode normal && $HOME/.local/bin/flocks"
+riverctl map "$mode_wmenu" None p spawn "riverctl enter-mode normal && $HOME/.local/bin/poff"
+riverctl map "$mode_wmenu" None m spawn "riverctl enter-mode normal && $HOME/.local/bin/wmulti"
+riverctl map "$mode_wmenu" None s spawn "riverctl enter-mode normal && $HOME/.local/bin/wsink"
+riverctl map "$mode_wmenu" None j spawn "riverctl enter-mode normal && $HOME/.local/bin/wjdoc"
+riverctl map "$mode_wmenu" None e spawn "riverctl enter-mode normal && $HOME/.local/bin/wemoji"
+
+riverctl declare-mode "$mode_apostrophe"
+riverctl map normal $mod apostrophe enter-mode "$mode_apostrophe"
+riverctl map "$mode_apostrophe" $mod apostrophe enter-mode normal
+riverctl map "$mode_apostrophe" None space enter-mode normal
+riverctl map "$mode_apostrophe" None Escape enter-mode normal
+riverctl map "$mode_apostrophe" None h spawn "cliphist wipe && riverctl enter-mode normal"
+riverctl map "$mode_apostrophe" None l spawn "$HOME/.local/bin/lsupdates && riverctl enter-mode normal"
+riverctl map "$mode_apostrophe" None w spawn "$HOME/.local/bin/dw && riverctl enter-mode normal"
+riverctl map "$mode_apostrophe" None c spawn "$HOME/.local/bin/wcal && riverctl enter-mode normal"
+
+riverctl declare-mode "$mode_wtype"
+riverctl map normal $mod semicolon spawn "riverctl enter-mode $mode_wtype" # && riverctl killall fcitx5"
+riverctl map "$mode_wtype" $mod semicolon enter-mode normal riverctl map "$mode_wtype" None space enter-mode normal
+riverctl map "$mode_wtype" None space enter-mode normal
+riverctl map "$mode_wtype" None Escape enter-mode normal
+riverctl map -repeat "$mode_wtype" None h spawn "wtype -k Left"
+riverctl map -repeat "$mode_wtype" None j spawn "wtype -k Down"
+riverctl map -repeat "$mode_wtype" None k spawn "wtype -k Up"
+riverctl map -repeat "$mode_wtype" None l spawn "wtype -k Right"
+riverctl map -repeat "$mode_wtype" None g spawn "wtype -k Home"
+riverctl map -repeat "$mode_wtype" Shift g spawn "wtype -k End"
+riverctl map -repeat "$mode_wtype" None u spawn "wtype -k Page_up"
+riverctl map -repeat "$mode_wtype" None d spawn "wtype -k Page_down"
+riverctl map -repeat "$mode_wtype" None 1 spawn "wtype -k F1 && riverctl enter-mode normal"
+riverctl map -repeat "$mode_wtype" None 2 spawn "wtype -k F2 && riverctl enter-mode normal"
+riverctl map -repeat "$mode_wtype" None 3 spawn "wtype -k F3 && riverctl enter-mode normal"
+riverctl map -repeat "$mode_wtype" None 4 spawn "wtype -k F4 && riverctl enter-mode normal"
+riverctl map -repeat "$mode_wtype" None 5 spawn "wtype -k F5 && riverctl enter-mode normal"
+riverctl map -repeat "$mode_wtype" None 6 spawn "wtype -k F6 && riverctl enter-mode normal"
+riverctl map -repeat "$mode_wtype" None 7 spawn "wtype -k F7 && riverctl enter-mode normal"
+riverctl map -repeat "$mode_wtype" None 8 spawn "wtype -k F8 && riverctl enter-mode normal"
+riverctl map -repeat "$mode_wtype" None 9 spawn "wtype -k F9 && riverctl enter-mode normal"
+riverctl map -repeat "$mode_wtype" None 10 spawn "wtype -k F10 && riverctl enter-mode normal"
+riverctl map -repeat "$mode_wtype" None 11 spawn "wtype -k F11 && riverctl enter-mode normal"
+riverctl map -repeat "$mode_wtype" None 12 spawn "wtype -k F12 && riverctl enter-mode normal"

@@ -1,0 +1,58 @@
+# @author nate zhou
+# @since 2025
+# i3bar-river/config.toml
+# The status generator command.
+# Optional: with no status generator the bar will display only tags and layout name.
+# command = "your command here"
+
+# Colors
+command = "i3blocks"
+background = "#427b58ff"
+color = "#ffffffff"
+separator = "#888888ff"
+tag_fg = "#d79921ff"
+tag_bg = "#427b58ff"
+tag_focused_fg = "#000000ff"
+tag_focused_bg = "#b16286ff"
+tag_urgent_fg = "#282828ff"
+tag_urgent_bg = "#b16286ff"
+tag_inactive_fg = "#d79921ff"
+tag_inactive_bg = "#000000ff"
+
+# The font and various sizes
+font = "SourceCodePro 13"
+height = 26
+margin_top = 0
+margin_bottom = 0
+margin_left = 0
+margin_right = 0
+separator_width = 0.0
+tags_r = 0.0
+tags_padding = 6
+tags_margin = 0.0
+blocks_r = 0.0
+blocks_overlap = 0.0
+
+# Misc
+position = "top" # either "top" or "bottom"
+layer = "top" # one of "top", "overlay", "bottom" or "background"
+hide_inactive_tags = false
+invert_touchpad_scrolling = true
+show_tags = true
+show_layout_name = true
+blend = true # whether tags/blocks colors should blend with bar's background
+show_mode = true
+start_hidden = false # whether the bar is initially in the 'hidden' state
+
+# WM-specific options
+[wm.river]
+max_tag = 9 # Show only the first nine tags
+
+# Per output overrides
+# [output.your-output-name]
+# right now only "enable" option is available
+# enable = false
+#
+# You can have any number of overrides
+# [output.eDP-1]
+# enable = false
