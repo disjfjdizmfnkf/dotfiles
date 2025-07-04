@@ -10,4 +10,4 @@ keymap.set("n", "-", "<C-x>")
 -- Jumplist
 keymap.set("n", "<C-m>", "<C-i>", opts)
 -- Slecet all
-keymap.set("n", "<C-a>", "ggVG", opts) -- 按 <leader>a 全选整个文件
+keymap.set("n", "<C-a>", "<cmd>normal! ggVG<CR>", { noremap = true, silent = true })
